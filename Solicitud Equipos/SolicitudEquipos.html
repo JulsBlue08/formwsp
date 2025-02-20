@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="StyleSheet" href="index.css">
+    <title>Solicitud de Equipo</title>
+    <script>
+        // Opciones de paquetes basados en el tipo y la configuración seleccionada
+        const opcionesPaquete = {
+            "Portátil": {
+                "Básica": [
+                    "Core i7 16 RAM 480 SSD",
+                    "Core i7 32 RAM 480 SSD"
+                ],
+                "Especial": [
+                    "Core i7 64 RAM 4 Gb RAM 1 Tb M2"
+                ]
+            },
+            "CPU": {
+                "Básica": [],
+                "Especial": [
+                    "Xeon W-2225 32 RAM T-Vídeo 8 Gb 512 SSD + 1 Tb",
+                    "Xeon W-2225 64 RAM T-Vídeo 8 Gb 512 SSD + 1 Tb"
+                ]
+            }
+        };
+
+        function actualizarPaquete() {
+            const tipo = document.getElementById('tipo').value;
+            const configuracion = document.getElementById('configuracion').value;
+            const paqueteSelect = document.getElementById('paquete');
+
+            // Limpiar opciones previas
+            paqueteSelect.innerHTML = '<option value="">--Seleccionar una opción--</option>';
+
+            // Agregar nuevas opciones basadas en el tipo y la configuración seleccionados
+            if (opcionesPaquete[tipo] && opcionesPaquete[tipo][configuracion]) {
+                opcionesPaquete[tipo][configuracion].forEach(opcion => {
+                    const nuevaOpcion = document.createElement('option');
+                    nuevaOpcion.value = opcion;
+                    nuevaOpcion.textContent = opcion;
+                    paqueteSelect.appendChild(nuevaOpcion);
+                });
+            }
+        }
+
+        function mostrarReporte() {
+            // Obtener los valores del formulario
+            const nombreUsuario = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const numeroProyecto = document.getElementById('numeroProyecto').value;
+            const tipo = document.getElementById('tipo').value;
+            const configuracion = document.getElementById('configuracion').value;
+            const paquete = document.getElementById('paquete').value;
+            const cargo = document.getElementById('cargo').value;
+            const motivo = document.getElementById('motivo').value;
+            const nombreAnalista = document.getElementById('nombreAnalista').value;
+            const observaciones = document.getElementById('observaciones').value;
+
+            // Crear el contenido para mostrar en el cuadro de texto
+            const contenido = `Buen Día William. <br><br>
+            <span class="rojo">Nombre del usuario:</span> ${nombreUsuario}<br>
+            <span class="rojo">Cédula:</span> ${cedula}<br>
+            <span class="rojo">Cargo:</span> ${cargo}<br>
+            <span class="rojo">Número de Proyecto:</span> ${numeroProyecto}<br>
+            <span class="rojo">Tipo:</span> ${tipo}<br>
+            <span class="rojo">Configuración:</span> ${configuracion}<br>
+            <span class="rojo">Paquete:</span> ${paquete}<br>
+            <span class="rojo">Motivo:</span> ${motivo}<br>
+            <span class="rojo">Nombre del Analista:</span> ${nombreAnalista}<br>
+            <span class="rojo">Observaciones:</span> ${observaciones}`;
+
+            // Asignar el contenido al cuadro de texto
+            document.getElementById('reporte').innerHTML = contenido;
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Solicitud de Equipo</h2>
+    <form onsubmit="event.preventDefault(); mostrarReporte();">
+        <label for="nombre">Nombre del usuario:</label>
+        <input type="text" id="nombre" required><br><br>
+
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" required><br><br>
+
+        <label for="cargo">Cargo:</label>
+        <textarea id="cargo" rows="2" cols="50" required></textarea><br><br>
+
+        <label for="numeroProyecto">Número de Proyecto:</label>
+        <input type="text" id="numeroProyecto" required><br><br>
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" onchange="actualizarPaquete()" required>
+            <option value="">--Seleccionar una opción--</option>
+            <option value="Portátil">Portátil</option>
+            <option value="CPU">CPU</option>
+        </select><br><br>
+
+        <label for="configuracion">Configuración:</label>
+        <select id="configuracion" onchange="actualizarPaquete()" required>
+            <option value="">--Seleccionar una opción--</option>
+            <option value="Básica">Básica</option>
+            <option value="Especial">Especial</option>
+        </select><br><br>
+
+        <label for="paquete">Paquete:</label>
+        <select id="paquete" required>
+            <option value="">--Seleccionar una opción--</option>
+        </select><br><br>
+
+        <label for="motivo">Motivo:</label>
+        <select id="motivo" required>
+            <option value="">--Seleccionar una opción--</option>
+            <option value="Onboarding">Onboarding</option>
+            <option value="Cambio">Cambio</option>
+            <option value="Reingreso">Reingreso</option>
+        </select><br><br>
+
+        <label for="nombreAnalista">Nombre del Analista:</label>
+        <input type="text" id="nombreAnalista" required><br><br>
+
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit">Generar reporte</button>
+       
+        <center><h3>Reporte Generado:</h3></center>
+        <div id="reporte" style="background-color: #fff; padding: 10px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 20px; box-sizing: border-box;"></div>
+    </form>
+
+</body>
+</html>
+

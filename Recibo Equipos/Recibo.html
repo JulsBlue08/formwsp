@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="StyleSheet" href="index.css">
+    <title>Formulario de Reporte</title>
+    <script>
+        function mostrarReporte() {
+            // Obtener los valores del formulario
+            const nombreUsuario = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const placa = document.getElementById('placa').value;
+            const metodoEntrega = document.getElementById('metodoEntrega').value;
+            const motivo = document.getElementById('motivo').value;
+            const llenaHojaTiempo = document.querySelector('input[name="hojaTiempo"]:checked')?.value;
+            const centroCostos = document.getElementById('centroCostos').value;
+            const hostname = document.getElementById('hostname').value;
+            const serviceTag = document.getElementById('serviceTag').value;
+            const anomalias = document.getElementById('anomalias').value;
+
+            // Crear el contenido para mostrar en el cuadro de texto
+            const contenido = `Buen Dia William. <br>
+            <br>
+            <span class="rojo">Nombre del usuario:</span> ${nombreUsuario}<br>
+            <span class="rojo">Correo:</span> ${correo}<br>
+            <span class="rojo">Placa:</span> ${placa}<br>
+            <span class="rojo">Método de Entrega:</span> ${metodoEntrega}<br>
+            <span class="rojo">Motivo:</span> ${motivo}<br>
+            <span class="rojo">Llena hoja de tiempo:</span> ${llenaHojaTiempo}<br>
+            <span class="rojo">Centro de costos:</span> ${centroCostos}<br>
+            <span class="rojo">Hostname:</span> ${hostname}<br>
+            <span class="rojo">Service tag:</span> ${serviceTag}<br>
+            <span class="rojo">Anomalías:</span> ${anomalias}`;
+
+            // Asignar el contenido al cuadro de texto
+            document.getElementById('reporte').innerHTML = contenido;
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Formulario de Reporte</h2>
+    <form onsubmit="event.preventDefault(); mostrarReporte();">
+        <label for="nombre">Nombre del usuario:</label>
+        <input type="text" id="nombre" required><br><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" required><br><br>
+
+        <label for="metodoEntrega">Método de entrega:</label>
+        <select id="metodoEntrega" required>
+            <option value="">--Seleccionar una opción--</option>
+            <option value="Personal">Personal</option>
+            <option value="Mensajería">Mensajería</option>
+            <option value="Tercero">Tercero</option>
+        </select><br><br>
+
+        <label for="motivo">Motivo:</label>
+        <select id="motivo" required>
+            <option value="">--Seleccionar una opción--</option>
+            <option value="Cambio">Cambio</option>
+            <option value="Terminación laboral">Terminación laboral</option>
+        </select><br><br>
+
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" required><br><br>
+
+        <label>¿Llena hoja de tiempo?</label><br>
+        <input type="radio" id="si" name="hojaTiempo" value="Sí" required> Sí
+        <input type="radio" id="no" name="hojaTiempo" value="No" required> No<br>
+        <input type="radio" id="n_a" name="hojaTiempo" value="N/A" required> N/A<br><br>
+
+        <label for="centroCostos">¿A qué centro de costos le trabajaba?</label>
+        <input type="text" id="centroCostos" required><br><br>
+
+        <label for="hostname">Hostname:</label>
+        <input type="text" id="hostname" required><br><br>
+
+        <label for="serviceTag">Service tag:</label>
+        <input type="text" id="serviceTag" required><br><br>
+
+        <label for="anomalias">Anomalías:</label><br>
+        <textarea id="anomalias" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit">Generar reporte</button>
+       
+        <center><h3>Reporte Generado:</h3></center>
+        <div id="reporte" style="background-color: #fff; padding: 10px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 20px; box-sizing: border-box;"></div>
+    </form>
+
+</body>
+</html>

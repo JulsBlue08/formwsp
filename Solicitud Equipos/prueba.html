@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Equipo</title>
+    <style>
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #db3a3ad8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Banner superior */
+        #banner {
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        /* Pestañas */
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px 5px 0 0;
+            margin-right: 2px;
+        }
+
+        .tab:hover {
+            background-color: #555;
+        }
+
+        .tab.active {
+            background-color: #db3a3ad8;
+        }
+
+        /* Contenido de pestañas */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilo de las etiquetas y campos */
+        label {
+            font-size: 13px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13px;
+            background-color: #fafafa;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            color: #ff0000;
+        }
+
+    </style>
+    <script>
+        function switchTab(tabIndex) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            // Desactivar todas las pestañas y ocultar su contenido
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Activar la pestaña seleccionada y su contenido
+            tabs[tabIndex].classList.add('active');
+            contents[tabIndex].classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div id="banner">Bienvenido a la Plataforma de Solicitud</div>
+
+    <div class="container">
+        <!-- Pestañas -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">Solicitud de Equipo</div>
+            <div class="tab" onclick="switchTab(1)">Formulario 2</div>
+        </div>
+
+        <!-- Contenido de la pestaña 1 -->
+        <div class="tab-content active">
+            <h2>Solicitud de Equipo</h2>
+            <form onsubmit="event.preventDefault();">
+                <label for="nombre">Nombre del usuario:</label>
+                <input type="text" id="nombre" required><br><br>
+
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" required><br><br>
+
+                <label for="cargo">Cargo:</label>
+                <textarea id="cargo" rows="2" cols="50" required></textarea><br><br>
+
+                <label for="numeroProyecto">Número de Proyecto:</label>
+                <input type="text" id="numeroProyecto" required><br><br>
+
+                <button type="submit">Enviar Solicitud</button>
+            </form>
+        </div>
+
+        <!-- Contenido de la pestaña 2 -->
+        <div class="tab-content">
+            <h2>Formulario 2</h2>
+            <form onsubmit="event.preventDefault();">
+                <label for="campo1">Campo 1:</label>
+                <input type="text" id="campo1" required><br><br>
+
+                <label for="campo2">Campo 2:</label>
+                <input type="text" id="campo2" required><br><br>
+
+                <button type="submit">Enviar Formulario 2</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
